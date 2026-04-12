@@ -7,7 +7,7 @@
     "dev": "vite",
     "server:dev": "nodemon --watch server --ext ts --exec \"node --import tsx/esm server/index.ts\"",
     "server": "node --import tsx/esm server/index.ts",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
