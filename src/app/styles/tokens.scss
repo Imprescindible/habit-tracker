@@ -1,0 +1,50 @@
+:root {
+  --color-navy:        #1A1A2E;
+  --color-navy-light:  #16213E;
+  --color-navy-mid:    #0F3460;
+  --color-crimson:     #E94560;
+  --color-crimson-dim: #c73652;
+
+  --surface-0: #1A1A2E;
+  --surface-1: #16213E;
+  --surface-2: #0F3460;
+  --surface-3: #1e2a4a;
+
+  --text-primary:   #f0f0f0;
+  --text-secondary: #9a9ab0;
+  --text-muted:     #555577;
+
+  --accent-primary:     #E94560;
+  --accent-crimson-dim: #c73652;
+  --accent-secondary:   #533483;
+  --accent-success:     #22c55e;
+  --accent-warning:     #f59e0b;
+  --accent-danger:      #ef4444;
+
+  --glass-bg:     rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.09);
+  --glass-blur:   16px;
+
+  --border-color:       rgba(255, 255, 255, 0.08);
+  --border-color-focus: var(--accent-primary);
+
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.5);
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+
+  --transition-fast:   150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow:   400ms ease;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --z-dropdown: 100;
+  --z-modal:    200;
+  --z-toast:    300;
+}

@@ -1,0 +1,32 @@
+.page {
+  max-width: 1200px;
+  margin:    0 auto;
+  padding:   32px 24px 64px;
+}
+
+.layout {
+  display: grid;
+  gap:     28px;
+
+  @media (min-width: 920px) {
+    grid-template-columns: 1fr 300px;
+    align-items: start;
+  }
+}
+
+.main    {}
+.sidebar {}
+
+.hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 8px;
+
+  code {
+    background: var(--surface-2);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+}

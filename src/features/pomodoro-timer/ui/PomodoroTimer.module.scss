@@ -1,0 +1,72 @@
+.timer {
+  display:     flex;
+  align-items: center;
+  gap:         14px;
+  flex-wrap:   wrap;
+}
+
+.ring {
+  position: relative;
+  width:    68px;
+  height:   68px;
+
+  svg { display: block; }
+}
+
+.time {
+  position:        absolute;
+  inset:           0;
+  display:         flex;
+  flex-direction:  column;
+  align-items:     center;
+  justify-content: center;
+}
+
+.digits {
+  font-size:   14px;
+  font-weight: 600;
+  color:       var(--text-primary);
+  line-height: 1;
+}
+
+.phaseLabel {
+  font-size: 9px;
+  color:     var(--text-muted);
+  margin-top: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.controls { display: flex; gap: 6px; }
+
+.btn {
+  width:         32px;
+  height:        32px;
+  border-radius: 50%;
+  font-size:     13px;
+  display:       flex;
+  align-items:   center;
+  justify-content: center;
+  transition:    all var(--transition-fast);
+
+  &:hover { transform: scale(1.1); }
+  &:active { transform: scale(0.95); }
+}
+
+.play  { background: rgba(233, 69, 96, 0.2); color: #E94560; &:hover { background: rgba(233,69,96,0.35); } }
+.pause { background: rgba(233, 69, 96, 0.2); color: #E94560; &:hover { background: rgba(233,69,96,0.35); } }
+.reset { background: rgba(255,255,255,0.06); color: var(--text-secondary); &:hover { background: rgba(255,255,255,0.12); color: var(--text-primary); } }
+
+.sessions {
+  display:     flex;
+  gap:         4px;
+  align-items: center;
+}
+
+.dot {
+  width:         6px;
+  height:        6px;
+  border-radius: 50%;
+  background:    var(--accent-primary);
+  opacity:       0.7;
+}

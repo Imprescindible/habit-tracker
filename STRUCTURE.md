@@ -1,0 +1,128 @@
+# Habit Tracker — Структура проекта (FSD)
+
+## Полное дерево папок
+
+```
+habit-tracker/
+│
+├── prisma/
+│   └── schema.prisma              ← Схема базы данных PostgreSQL
+│
+├── src/
+│   │
+│   ├── main.tsx                   ← Точка входа, монтирует App
+│   │
+│   ├── app/                       ← СЛОЙ: app (настройка приложения)
+│   │   ├── index.tsx              ← Корневой компонент App с роутером
+│   │   ├── providers/
+│   │   │   └── StoreProvider.tsx  ← Провайдеры (Auth, Query и т.д.)
+│   │   └── styles/
+│   │       ├── globals.scss       ← Глобальный CSS reset
+│   │       └── tokens.scss        ← Дизайн-токены (цвета, тени, шрифты)
+│   │
+│   ├── pages/                     ← СЛОЙ: pages (страницы приложения)
+│   │   ├── dashboard/
+│   │   │   ├── ui/
+│   │   │   │   ├── DashboardPage.tsx
+│   │   │   │   └── DashboardPage.module.scss
+│   │   │   └── index.ts           ← public API страницы
+│   │   └── habit-detail/
+│   │       ├── ui/
+│   │       │   └── HabitDetailPage.tsx
+│   │       └── index.ts
+│   │
+│   ├── widgets/                   ← СЛОЙ: widgets (крупные блоки UI)
+│   │   ├── habit-list/
+│   │   │   ├── ui/
+│   │   │   │   ├── HabitList.tsx
+│   │   │   │   └── HabitList.module.scss
+│   │   │   └── index.ts
+│   │   ├── analytics-panel/
+│   │   │   ├── ui/
+│   │   │   │   ├── AnalyticsPanel.tsx
+│   │   │   │   └── AnalyticsPanel.module.scss
+│   │   │   └── index.ts
+│   │   └── header/
+│   │       ├── ui/
+│   │       │   └── Header.tsx
+│   │       └── index.ts
+│   │
+│   ├── features/                  ← СЛОЙ: features (бизнес-действия)
+│   │   ├── toggle-habit/
+│   │   │   ├── model/
+│   │   │   │   └── toggleHabit.ts ← Optimistic Update логика
+│   │   │   └── index.ts
+│   │   ├── add-habit/
+│   │   │   ├── model/
+│   │   │   │   └── addHabitStore.ts
+│   │   │   ├── ui/
+│   │   │   │   ├── AddHabitForm.tsx
+│   │   │   │   └── AddHabitForm.module.scss
+│   │   │   └── index.ts
+│   │   ├── edit-habit/
+│   │   │   ├── model/
+│   │   │   │   └── editHabitStore.ts
+│   │   │   ├── ui/
+│   │   │   │   └── EditHabitModal.tsx
+│   │   │   └── index.ts
+│   │   └── pomodoro-timer/
+│   │       ├── model/
+│   │       │   └── pomodoroStore.ts
+│   │       ├── ui/
+│   │       │   ├── PomodoroTimer.tsx
+│   │       │   └── PomodoroTimer.module.scss
+│   │       └── index.ts
+│   │
+│   ├── entities/                  ← СЛОЙ: entities (бизнес-сущности)
+│   │   └── habit/
+│   │       ├── model/
+│   │       │   ├── types.ts       ← ВСЕ TypeScript-типы
+│   │       │   ├── habitStore.ts  ← Zustand стор с persist
+│   │       │   └── selectors.ts   ← Производные данные
+│   │       ├── ui/
+│   │       │   ├── HabitCard.tsx
+│   │       │   └── HabitCard.module.scss
+│   │       ├── api/
+│   │       │   └── habitApi.ts    ← HTTP-клиент
+│   │       └── index.ts           ← PUBLIC API (единственная точка импорта)
+│   │
+│   └── shared/                    ← СЛОЙ: shared (переиспользуемое)
+│       ├── api/
+│       │   ├── client.ts          ← Базовый fetch-клиент
+│       │   └── types.ts           ← Общие API-типы
+│       ├── config/
+│       │   ├── env.ts             ← Переменные окружения
+│       │   └── constants.ts
+│       ├── lib/
+│       │   ├── db/
+│       │   │   └── dexie.ts       ← IndexedDB (offline-first)
+│       │   └── utils/
+│       │       ├── streak.ts      ← Алгоритм стриков
+│       │       └── date.ts        ← Форматирование дат
+│       └── ui/
+│           ├── Button/
+│           │   ├── Button.tsx
+│           │   ├── Button.module.scss
+│           │   └── index.ts
+│           ├── Input/
+│           ├── Modal/
+│           └── Badge/
+│
+├── package.json
+├── vite.config.ts
+└── tsconfig.json
+```
+
+## Правило импортов (строго соблюдать)
+
+```
+app     → может импортировать из всех слоёв
+pages   → widgets, features, entities, shared
+widgets → features, entities, shared
+features→ entities, shared
+entities→ shared
+shared  → ничего из проекта
+```
+
+Между фичами (`features/toggle-habit` → `features/add-habit`) импорты ЗАПРЕЩЕНЫ.
+Импортировать можно только через `index.ts` каждого слайса — не напрямую вглубь.

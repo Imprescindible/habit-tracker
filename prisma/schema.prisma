@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt     @map("updated_at")
+  habits    Habit[]
+  freezes   FreezeDay[]
+  @@map("users")
+}
+
+model Habit {
+  id               String       @id @default(cuid())
+  userId           String       @map("user_id")
+  title            String
+  description      String?
+  type             HabitType    @default(BINARY)
+  goalValue        Float?       @map("goal_value")
+  goalUnit         String?      @map("goal_unit")
+  timeSlot         TimeSlot     @default(ANYTIME) @map("time_slot")
+  scheduleType     ScheduleType @default(DAILY)   @map("schedule_type")
+  scheduleDays     Int[]        @map("schedule_days")
+  scheduleInterval Int?         @map("schedule_interval")
+  color            String       @default("#E94560")
+  isArchived       Boolean      @default(false)   @map("is_archived")
+  createdAt        DateTime     @default(now())   @map("created_at")
+  updatedAt        DateTime     @updatedAt        @map("updated_at")
+  user             User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  completions      HabitCompletion[]
+  @@map("habits")
+}
+
+model HabitCompletion {
+  id        String   @id @default(cuid())
+  habitId   String   @map("habit_id")
+  date      DateTime @db.Date
+  value     Float?
+  createdAt DateTime @default(now()) @map("created_at")
+  habit     Habit    @relation(fields: [habitId], references: [id], onDelete: Cascade)
+  @@unique([habitId, date])
+  @@map("habit_completions")
+}
+
+model FreezeDay {
+  id     String   @id @default(cuid())
+  userId String   @map("user_id")
+  date   DateTime @db.Date
+  reason String?
+  user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([userId, date])
+  @@map("freeze_days")
+}
+
+enum HabitType {
+  BINARY
+  QUANTITATIVE
+}
+
+enum TimeSlot {
+  MORNING
+  AFTERNOON
+  EVENING
+  ANYTIME
+}
+
+enum ScheduleType {
+  DAILY
+  SPECIFIC_DAYS
+  INTERVAL
+}

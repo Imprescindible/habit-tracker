@@ -1,0 +1,55 @@
+.wrap { display: flex; flex-direction: column; gap: 28px; }
+
+.toolbar {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+}
+
+.sectionTitle {
+  font-size:   22px;
+  font-weight: 600;
+  color:       var(--text-primary);
+}
+
+.group { display: flex; flex-direction: column; gap: 10px; }
+
+.groupHeader {
+  display:     flex;
+  align-items: center;
+  gap:         8px;
+  padding:     6px 0;
+}
+
+.groupIcon  { font-size: 16px; }
+.groupLabel {
+  font-size:   13px;
+  font-weight: 600;
+  color:       var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.groupCount {
+  font-size:     11px;
+  background:    var(--surface-2);
+  color:         var(--text-muted);
+  padding:       2px 7px;
+  border-radius: 10px;
+}
+
+.cards { display: flex; flex-direction: column; gap: 8px; }
+
+/* Empty state */
+.empty {
+  display:         flex;
+  flex-direction:  column;
+  align-items:     center;
+  justify-content: center;
+  gap:             16px;
+  padding:         64px 24px;
+  text-align:      center;
+}
+
+.emptyIcon  { font-size: 52px; }
+.emptyTitle { font-size: 20px; font-weight: 600; color: var(--text-primary); }
+.emptyText  { font-size: 14px; color: var(--text-secondary); max-width: 280px; line-height: 1.6; }
