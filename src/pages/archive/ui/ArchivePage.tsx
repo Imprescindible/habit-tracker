@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useHabitStore } from "@entities/habit";
 import { EditHabitModal } from "@features/edit-habit";
+import { habitApi } from "@entities/habit";
 import type { Habit } from "@entities/habit";
 import styles from "./ArchivePage.module.scss";
 
@@ -9,7 +10,8 @@ export function ArchivePage() {
   const { updateHabit } = useHabitStore();
   const [editingHabit, setEditingHabit] = useState<Habit | null>(null);
 
-  const restore = (habit: Habit) => {
+  const restore = async (habit: Habit) => {
+    await habitApi.update({ id: habit.id, isArchived: false });
     updateHabit({ ...habit, isArchived: false });
   };
 
