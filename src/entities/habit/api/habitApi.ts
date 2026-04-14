@@ -58,4 +58,8 @@ export const habitApi = {
     request<HabitCompletion[]>(
       `${BASE}/${habitId}/completions?from=${from}&to=${to}`,
     ),
+  delete: (id: string) =>
+    request<void>(`${BASE}/${id}`, {
+      method: "DELETE",
+    }),
 };
