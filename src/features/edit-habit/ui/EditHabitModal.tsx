@@ -70,7 +70,6 @@ export function EditHabitModal({ habit, onClose }: Props) {
       updateHabit(updated);
       onClose();
     } catch {
-      // можно добавить toast
     } finally {
       setLoading(false);
     }
@@ -81,9 +80,7 @@ export function EditHabitModal({ habit, onClose }: Props) {
       await habitApi.archive(habit.id);
       archiveHabit(habit.id);
       onClose();
-    } catch {
-      /* ignore */
-    }
+    } catch {}
   };
 
   const handleDelete = async () => {
@@ -95,9 +92,7 @@ export function EditHabitModal({ habit, onClose }: Props) {
       await habitApi.delete(habit.id);
       deleteHabit(habit.id);
       onClose();
-    } catch {
-      /* ignore */
-    }
+    } catch {}
   };
 
   return (
