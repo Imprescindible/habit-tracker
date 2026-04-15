@@ -117,6 +117,9 @@ habitsRouter.post("/:id/archive", async (req, res) => {
 
 habitsRouter.delete("/:id", async (req, res) => {
   try {
+    await prisma.habitCompletion.deleteMany({
+      where: { habitId: req.params.id },
+    });
     await prisma.habit.delete({ where: { id: req.params.id } });
     res.status(204).send();
   } catch (err) {
