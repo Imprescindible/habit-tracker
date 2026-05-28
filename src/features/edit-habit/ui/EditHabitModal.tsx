@@ -19,9 +19,10 @@ const DAYS_RU = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
 interface Props {
   habit: Habit;
   onClose: () => void;
+  onDeleted?: () => void;
 }
 
-export function EditHabitModal({ habit, onClose }: Props) {
+export function EditHabitModal({ habit, onClose, onDeleted }: Props) {
   const { updateHabit, archiveHabit, deleteHabit } = useHabitStore();
 
   const [title, setTitle] = useState(habit.title);
@@ -91,7 +92,7 @@ export function EditHabitModal({ habit, onClose }: Props) {
     try {
       await habitApi.delete(habit.id);
       deleteHabit(habit.id);
-      onClose();
+      onDeleted ? onDeleted() : onClose();
     } catch {}
   };
 

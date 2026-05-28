@@ -290,7 +290,11 @@ export function HabitDetailPage() {
       )}
 
       {showEdit && (
-        <EditHabitModal habit={habit} onClose={() => setShowEdit(false)} />
+        <EditHabitModal
+          habit={habit}
+          onClose={() => setShowEdit(false)}
+          onDeleted={() => navigate("/dashboard")}
+        />
       )}
     </main>
   );
